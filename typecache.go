@@ -10,19 +10,22 @@ var (
 	typeByRTypeGuard sync.Mutex
 )
 
-func TypeOf(obj interface{}) *Type {
-	rtype := objectRType(obj)
-
-	typeByRTypeGuard.Lock()
-	defer typeByRTypeGuard.Unlock()
+func typeOfRType(rtype reflect.Type) *Type {
 
 	if t, ok := typeByRType[rtype]; ok {
 		return t
 	}
 
-	t := NewType(rtype)
+	t := newType(rtype)
 
 	typeByRType[rtype] = t
 
 	return t
+}
+
+func TypeOf(obj interface{}) *Type {
+	typeByRTypeGuard.Lock()
+	defer typeByRTypeGuard.Unlock()
+
+	return typeOfRType(objectRType(obj))
 }

@@ -41,6 +41,7 @@ func (p Pointer) String() *string          { return (*string)(p.p) }
 func (p Pointer) StringPtr() **string      { return (**string)(p.p) }
 func (p Pointer) StringSlice() *[]string   { return (*[]string)(p.p) }
 func (p Pointer) Bytes() *[]byte           { return (*[]byte)(p.p) }
+func (p Pointer) Interface() *interface{}  { return (*interface{})(p.p) }
 func (p Pointer) BytesSlice() *[][]byte    { return (*[][]byte)(p.p) }
 
 func (p Pointer) SetPointer(v Pointer) {
